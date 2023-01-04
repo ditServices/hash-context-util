@@ -3,11 +3,12 @@
 #include <filesystem>
 #include "cargs.h"
 
+#include "hash_generator.h"
+
 namespace fs = std::filesystem;
 using namespace std;
 
-uint64_t calc_xxh(fs::path source);
-
+// option identifiers for cargs - command line argument parser.
 static struct cag_option options[] {
         {   .identifier = 's',
                  .access_letters = "s",
@@ -21,6 +22,7 @@ static struct cag_option options[] {
          .description = "Shows the commands help information."}
 };
 
+// configuration variables for cargs, data is stored here when parsed.
 struct configuration {
     fs::path source_file;
 };
@@ -29,6 +31,8 @@ int main(int argc, char* argv[]) {
     char identifier;
     cag_option_context context;
     struct configuration config;
+
+    hash_generator hash_gen_ctx;
 
     cag_option_prepare(&context, options, CAG_ARRAY_SIZE(options), argc, argv);
 
@@ -50,7 +54,7 @@ int main(int argc, char* argv[]) {
     }
 
     if(is_regular_file(config.source_file)){
-        ::uint64_t result = calc_xxh(config.source_file);
+        ::uint64_t result = hash_gen_ctx.calc_xxh(config.source_file);
         if(result != 0) {
             cout << config.source_file.filename() << ": ";
             cout << setfill('0') << setw(16) << std::hex << result << std::endl;
@@ -62,43 +66,4 @@ int main(int argc, char* argv[]) {
     }
 
     return 0;
-}
-
-uint64_t calc_xxh(fs::path source) {
-    size_t const bufferSize = 512;
-    void * const buffer = malloc(bufferSize);
-    if(buffer == nullptr) {
-        free(buffer);
-        return 0;
-    }
-
-    XXH64_state_t* const state = XXH64_createState();
-    XXH64_hash_t const seed = 0;
-    if(XXH64_reset(state, seed)) {
-        free(buffer);
-        return 0;
-    }
-
-    FILE *src = fopen(source.string().c_str(), "rb");
-    if(!src) {
-        free(buffer);
-        return 0;
-    }
-
-    ssize_t bytes;
-    while((bytes = fread(buffer, 1, bufferSize, src)) != 0) {
-        if(bytes == 0) {
-            free(buffer);
-            return 0;
-        }
-        if(XXH64_update(state, buffer, bytes) == XXH_ERROR) {
-            free(buffer);
-            return 0;
-        }
-    }
-
-    uint64_t digest = XXH64_digest(state);
-    fclose(src);
-    free(buffer);
-    return digest;
 }
