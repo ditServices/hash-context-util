@@ -3,7 +3,8 @@
 #include <filesystem>
 #include "cargs.h"
 
-#include "hash_generator.h"
+#include "xxhash_generator.h"
+#include "md5_generator.h"
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -32,7 +33,7 @@ int main(int argc, char* argv[]) {
     cag_option_context context;
     struct configuration config;
 
-    hash_generator hash_gen_ctx;
+    xxhash_generator hash_gen_ctx;
 
     cag_option_prepare(&context, options, CAG_ARRAY_SIZE(options), argc, argv);
 

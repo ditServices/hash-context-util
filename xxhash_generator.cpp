@@ -3,9 +3,9 @@
 //
 
 #include "xxhash.h"
-#include "hash_generator.h"
+#include "xxhash_generator.h"
 
-uint64_t hash_generator::calc_xxh(fs::path source) {
+uint64_t xxhash_generator::calc_xxh(const fs::path& source) {
     size_t const bufferSize = 512;
     void * const buffer = malloc(bufferSize);
     if(buffer == nullptr) {

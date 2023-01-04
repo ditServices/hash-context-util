@@ -3,7 +3,7 @@
 //
 #include <iostream>
 #include "assert_macro.h"
-#include "../../hash_generator.h"
+#include "../../xxhash_generator.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
 
 int test_xxhash() {
     int err_code = 0;
-    hash_generator test_gen;
+    xxhash_generator test_gen;
     fs::path sample_file = "xxh_sample";
 
     uint64_t sample_h = 0xef46db3751d8e999;
