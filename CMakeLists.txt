@@ -3,7 +3,9 @@ project(context_hash)
 
 set(CMAKE_CXX_STANDARD 17)
 
+enable_testing()
 add_subdirectory(lib/cargs)
+add_subdirectory(test/ctest)
 
 option(BUILD_SHARED_LIBS "Build shared libs" OFF) #optional
 add_subdirectory(lib/xxHash/cmake_unofficial lib/xxHash/build EXCLUDE_FROM_ALL)
