@@ -2,7 +2,6 @@
 // Created by Howard Colin on 04/01/2023.
 //
 #include <iostream>
-#include "assert_macro.h"
 #include "../../xxhash_generator.h"
 
 using namespace std;

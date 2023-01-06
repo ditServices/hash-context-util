@@ -25,3 +25,7 @@ int md5_generator::md5_generate(const fs::path& source) {
     fclose(src);
     return 0;
 }
+
+unsigned char* md5_generator::get_digest() {
+    return this->digest;
+}
