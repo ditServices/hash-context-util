@@ -20,9 +20,13 @@ When right-clicking files from now on, the service should be visible.
 ## Roadmap
 
 - Refactor code into class based design, simplify and comment
+  - Partially complete
 - Write tests to ensure that the hash generation is operating correctly
+  - In progress
 - Check for memory leaks
-- Add Md5 checksum 
 - Add recursive checksum for supporting the right click of folders
 - Add .MHL file generation 
 - Add .MHL file verification
+
+## Completed Tasks
+- ~~Add Md5 checksum~~ _DONE_
