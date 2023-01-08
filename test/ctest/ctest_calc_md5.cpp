@@ -17,7 +17,7 @@ int test_md5() {
     unsigned char ref_digest[] = "d41d8cd98f00b204e9800998ecf8427e";
     if(md5_gen_ctx.md5_generate(sample_file) != 0) {
         return err_code + 1;
-    };
+    }
 
     unsigned char *calculated_digest = md5_gen_ctx.get_digest();
     std::cout << std::setfill('0') << std::setw(2) << std::hex << ref_digest << endl;
@@ -25,7 +25,12 @@ int test_md5() {
     for(int i = 0; i < MD5_DIGEST_LENGTH; i++) {
         std::cout << std::setfill('0') << std::setw(2) << std::hex << static_cast<int>(calculated_digest[i]);
     }
+    cout << endl; //stub code to be deleted
 
+    //TODO: Issues with comparison - could be definition of reference digest is incorrect.
+    int compare = std::memcmp(calculated_digest, ref_digest , MD5_DIGEST_LENGTH);
+
+    cout << "Comparison result: " << compare << endl; // stub code to be deleted.
     return err_code;
 }
 
