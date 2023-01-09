@@ -10,8 +10,10 @@
 namespace fs = std::filesystem;
 
 class xxhash_generator {
+    uint64_t digest = 0;
 public:
-    static uint64_t calc_xxh(const fs::path& source);
+    int calc_xxh(const fs::path& source);
+    uint64_t get_hash();
 };
 
 

@@ -54,16 +54,17 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    if(is_regular_file(config.source_file)){
-        ::uint64_t result = hash_gen_ctx.calc_xxh(config.source_file);
-        if(result != 0) {
+    if(is_regular_file(config.source_file)) {
+        int hash_status = hash_gen_ctx.calc_xxh(config.source_file);
+
+        if (hash_status == 0) {
             cout << config.source_file.filename() << ": ";
-            cout << setfill('0') << setw(16) << std::hex << result << std::endl;
+            cout << setfill('0') << setw(16) << std::hex << hash_gen_ctx.get_hash() << std::endl;
         } else {
-            cout << "Hash / File Error" << endl;
+            cout << "Hash Calculation Error" << endl;
         }
     } else {
-        cout << "ERROR: Invalid or unable to read source file" << endl;
+        cout << "Unable to read file or incorrect file / directory supplied" << endl;
     }
 
     return 0;

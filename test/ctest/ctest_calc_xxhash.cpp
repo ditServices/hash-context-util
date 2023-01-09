@@ -15,13 +15,17 @@ int test_xxhash() {
     fs::path sample_file = "xxh_sample";
 
     uint64_t sample_h = 0xef46db3751d8e999;
-    uint64_t calculated_h = test_gen.calc_xxh(sample_file);
-    if(calculated_h != sample_h){
+
+    if(test_gen.calc_xxh(sample_file) != 0) {
+        err_code += 1;
+    }
+
+    if(test_gen.get_hash() != sample_h){
         err_code = 1;
         cout << "HASH TEST FAILED - REFERENCE: ";
         cout << setfill('0') << setw(16) << std::hex << sample_h << " : ";
         cout << "CALCULATED: ";
-        cout << setfill('0') << setw(16) << std::hex << calculated_h << std::endl;
+        cout << setfill('0') << setw(16) << std::hex << test_gen.get_hash() << std::endl;
     };
 
     return err_code;
