@@ -18,6 +18,13 @@ static struct cag_option options[] {
                  .description = "Path to source file that will be processed"
         },
 
+        { .identifier = 't',
+          .access_letters = "t",
+          .access_name = "hash-type",
+          .value_name = "VALUE",
+          .description = "set the hash type xxh or md5"
+                  },
+
         {.identifier = 'h',
          .access_name = "help",
          .description = "Shows the commands help information."}
