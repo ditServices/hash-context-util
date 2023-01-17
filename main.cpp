@@ -95,6 +95,7 @@ int main(int argc, char *argv[]) {
                 for(int i = 0; i < MD5_DIGEST_LENGTH; i++) {
                     std::cout << std::setfill('0') << std::setw(2) << std::hex << static_cast<int>(calculated_digest[i]);
                 }
+                cout << endl;
             }
             else {
                 cout << setfill('0') << setw(16) << std::hex << hash_gen_ctx.get_hash() << std::endl;
