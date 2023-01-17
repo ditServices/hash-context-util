@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
 
 class md5_generator {
 private:
-    unsigned char digest[MD5_DIGEST_LENGTH];
+    unsigned char digest[MD5_DIGEST_LENGTH] = "";
 public:
     int md5_generate(const fs::path& source);
     unsigned char* get_digest();
