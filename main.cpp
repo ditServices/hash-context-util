@@ -1,5 +1,4 @@
 #include <iostream>
-#include <xxhash.h>
 #include <filesystem>
 #include "cargs.h"
 
@@ -77,7 +76,7 @@ int main(int argc, char *argv[]) {
     md5_generator md5_gen_ctx;
 
     if (is_regular_file(config.source_file)) {
-        int hash_status = 0;
+        int hash_status;
 
         if(config.is_md5)
             hash_status = md5_gen_ctx.md5_generate(config.source_file);
