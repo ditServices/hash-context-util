@@ -1,3 +1,10 @@
+/*
+ * MD5 and xxHash completed. Memory leak tests need to be carried out and any adjustments made.
+ * Error handling needs to be improved
+ * Add a recursive option
+ * Add MHL generation
+ */
+
 #include <iostream>
 #include <filesystem>
 #include "cargs.h"
